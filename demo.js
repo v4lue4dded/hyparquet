@@ -79,11 +79,13 @@ function processFile(file) {
       const arrayBuffer = e.target.result
       const metadata = parquetMetadata(arrayBuffer)
       renderSidebar(arrayBuffer, metadata, file.name)
+      console.log('start loading')
       const startTime = performance.now()
-      // parquetRead({ file: arrayBuffer, onComplete(data) {
-      //   const ms = performance.now() - startTime
-      //   console.log(`parsed ${file.name} in ${ms.toFixed(0)} ms`)
-      // } }) // TODO
+      parquetRead({ file: asyncBuffer, onComplete(data) {
+        const ms = performance.now() - startTime
+        console.log(`parsed ${file.name} in ${ms.toFixed(0)} ms`)
+        console.log(data)
+      } })
     } catch (e) {
       console.error('Error parsing file', e)
       dropzone.innerHTML = `<strong>${file.name}</strong>`
