@@ -81,7 +81,7 @@ function processFile(file) {
       renderSidebar(arrayBuffer, metadata, file.name)
       console.log('start loading')
       const startTime = performance.now()
-      parquetRead({ file: asyncBuffer, onComplete(data) {
+      parquetRead({ file: arrayBuffer, onComplete(data) {
         const ms = performance.now() - startTime
         console.log(`parsed ${file.name} in ${ms.toFixed(0)} ms`)
         console.log(data)
