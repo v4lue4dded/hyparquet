@@ -37,7 +37,6 @@ dropzone.addEventListener('drop', e => {
 })
 
 async function processUrl(url) {
-  console.log('processUrl');
   try {
     // Check if file is accessible and get its size
     const head = await fetch(url, { method: 'HEAD' })
@@ -74,7 +73,6 @@ async function processUrl(url) {
 }
 
 function processFile(file) {
-  console.log('processFile');
   const reader = new FileReader()
   reader.onload = e => {
     try {
@@ -102,7 +100,6 @@ function processFile(file) {
 }
 
 function renderSidebar(asyncBuffer, metadata, name) {
-  console.log('renderSidebar');
   layout.innerHTML = `<strong>${name}</strong>`
   // render file layout
   layout.appendChild(fileLayout(metadata, asyncBuffer.byteLength))
@@ -123,7 +120,6 @@ fileInput.addEventListener('change', () => {
 
 // Render file layout
 function fileLayout(metadata, byteLength) {
-  console.log('fileLayout');
   let html = '<h2>File layout</h2>'
   html += cell('PAR1', 0, 4, 4) // magic number
   for (const rowGroupIndex in metadata.row_groups) {
@@ -155,11 +151,9 @@ function fileLayout(metadata, byteLength) {
   return div
 }
 function group(name) {
-  console.log('group');
   return `<div>${name}`
 }
 function cell(name, start, bytes, end) {
-  console.log('cell');
   return `
     <div class="cell">
       <label>${name}</label>
@@ -173,7 +167,6 @@ function cell(name, start, bytes, end) {
 
 // Render metadata
 function fileMetadata(metadata) {
-  console.log('fileMetadata');
   let html = '<h2>Metadata</h2>'
   html += `<pre>${JSON.stringify(metadata, null, 2)}</pre>`
   const div = document.createElement('div')
